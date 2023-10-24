@@ -1,0 +1,55 @@
+#include<iostream>
+#include<queue>
+#include<stack>
+#include<cstring>
+using namespace std;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n,m;
+    cin>>n>>m;
+    vector<int> V[n+1];
+    vector<bool> visited(n+1,false);
+    for (int i=0;i<m;i++){
+        int x,y;
+        cin>>x>>y;
+        V[x].push_back(y);
+        V[y].push_back(x);
+    }
+    int pred[n+1];
+    memset(pred,-1,sizeof pred);
+    queue<int> q;
+    q.push(1);
+    visited[1]=true;
+    bool f=true;
+    while(!q.empty()){
+        int x=q.front();
+        q.pop();
+        for (int i: V[x]){
+            if (!visited[i]){
+                if (i==n) f=false;
+                q.push(i);
+                visited[i]=true;
+                pred[i]=x;
+            }
+        }
+    }
+    if (f) {
+        cout<<"IMPOSSIBLE\n";
+        return 0;
+    }
+    stack<int> ans;
+    while(pred[n]!=-1){
+        ans.push(n);
+        n=pred[n];
+    }
+    ans.push(1);
+    cout<<int(ans.size())<<endl;
+    while (!ans.empty()){
+        cout<<ans.top()<<' ';
+        ans.pop();
+    }
+    cout<<endl;
+}
