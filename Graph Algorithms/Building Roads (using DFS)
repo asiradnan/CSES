@@ -2,7 +2,6 @@
 #include<iostream>
 #include<vector>
 using namespace std;
-using ll=long long;
 vector<int> V[100001];
 vector<bool> visited(100001,false);
 int last;
