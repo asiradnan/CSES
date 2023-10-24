@@ -1,15 +1,7 @@
 #include<iostream>
-#include<iomanip>
-#include<climits>
-#include<cmath>
-#include<vector>
-#include<map>
 #include<queue>
-#include<algorithm>
-#include<cstring>
 #include<stack>
 using namespace std;
-using ll=long long;
 char grid[1000][1000];
 bool visited[1000][1000];
 pair<int,int> pred[1000][1000];
