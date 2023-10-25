@@ -1,0 +1,24 @@
+//https://cses.fi/problemset/task/1646/
+#include<iostream>
+using namespace std;
+using ll=long long;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n,q;
+    cin>>n>>q;
+    ll arr[n+1];
+    arr[0]=0;
+    for (int i=0;i<n;i++){
+        int a;
+        cin>>a;
+        arr[i+1]=arr[i]+a;
+    }
+    while(q--){
+        int a,b;
+        cin>>a>>b;
+        cout<<arr[b]-arr[a-1]<<endl;
+    }
+}
