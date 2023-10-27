@@ -1,0 +1,28 @@
+//https://cses.fi/problemset/task/1674/
+#include<iostream>
+#include<vector>
+using namespace std;
+using ll=long long;
+vector<int> v[200001];
+vector<ll> ans(200001);
+ll cnt(int x)
+{
+	ll sum=0;
+	for (int i:v[x]){
+		sum+=1+cnt(i);
+	}
+	return ans[x]=sum;
+}
+int main()
+{
+	int  n;
+	cin>>n;
+	for (int i=2;i<=n;i++){
+		int a;
+		cin>>a;
+		v[a].push_back(i);
+	}
+	cnt(1);
+	for (int i=1;i<=n;i++) cout<<ans[i]<<' ';
+	cout<<endl;
+}
