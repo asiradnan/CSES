@@ -1,0 +1,24 @@
+//https://cses.fi/problemset/task/1069/
+#include<iostream>
+using namespace std;
+using ll=long long;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+	string s;
+	cin>>s;
+	int ans=1,c=1;
+	char last=s[0];
+	for (int i=1;i<s.size();i++){
+		if (s[i]==last) c++;
+		else{
+			ans=max(c,ans);
+			last=s[i];
+			c=1;
+		}
+	}
+	ans=max(c,ans);
+	cout<<ans<<endl;
+}
