@@ -1,0 +1,30 @@
+//https://cses.fi/problemset/task/1640/
+#include<iostream>
+#include<algorithm>
+using namespace std;
+using ll=long long;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+	int n,k;
+	cin>>n>>k;
+	pair<ll,int> arr[n];
+	for (int i=0;i<n;i++) {
+		cin>>arr[i].first;
+		arr[i].second=i+1;
+	}
+	sort(arr,arr+n);
+	bool imp=true;
+	int i=0,j=n-1;
+	while(i<j && imp){
+		if (arr[i].first+arr[j].first>k) j--;
+		else if (arr[i].first+arr[j].first<k) i++;
+		else {
+			cout<<arr[i].second<<' '<<arr[j].second<<endl;
+			imp=false;
+		}
+	}
+	if (imp) cout<<"IMPOSSIBLE\n";
+}
