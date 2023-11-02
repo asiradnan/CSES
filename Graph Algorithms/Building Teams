@@ -1,0 +1,48 @@
+//https://cses.fi/problemset/task/1668/
+#include<iostream>
+#include<vector>
+using namespace std;
+using ll=long long;
+vector<int> edges[100001];
+vector<bool> visited(100001), one(100001),two(100001);
+bool ans=true;
+void dfs(int x)
+{
+	visited[x]=1;
+	for (int i:edges[x]){
+		if (one[x]){
+			if (!two[x]) two[i]=true;
+			else ans=false;
+		}
+		else {
+			if (!one[x]) one[i]=true;
+			else ans=false;
+		}
+		if (!visited[i]) dfs(i);
+	}
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+	int n,m;
+	cin>>n>>m;
+	for (int i=0;i<m;i++) {
+		int a,b;
+		cin>>a>>b;
+		edges[a].push_back(b);
+		edges[b].push_back(a);
+	}
+	for (int i=1;i<=n;i++){
+		if (!visited[i]) dfs(i);
+	}
+	if (ans){
+		for (int i=1;i<=n;i++) {
+			if (one[i]) cout<<1<<' ';
+			else cout<<2<<' ';
+		}
+		cout<<endl;
+	}
+	else cout<<"IMPOSSIBLE\n";
+}
