@@ -1,0 +1,53 @@
+//https://cses.fi/problemset/task/1648/
+#include<iostream>
+using namespace std;
+using ll=long long;
+ll arr[200001],tree[600001];
+void build(int idx, int b, int e)
+{
+    if (b==e) {
+        tree[idx]=arr[b];
+        return;
+    }
+    int mid=(b+e)/2,left=idx*2,right=idx*2+1;
+    build(left,b,mid);
+    build(right,mid+1,e);
+    tree[idx]=tree[left]+tree[right];
+}
+void update(int idx, int b, int e, int pos, int value)
+{
+	if (pos<b || e<pos) return;
+	if (b==e && b==pos){
+		tree[idx]=value;
+		return;
+	}
+	int mid=(b+e)/2,left=idx*2,right=idx*2+1;
+	update(left,b,mid,pos,value);
+	update(right,mid+1,e,pos,value);
+	tree[idx]=tree[left]+tree[right];
+}
+ll query(int idx, int b, int e, int l, int r)
+{
+    if (r<b || e<l) return 0;
+    if (l<=b && e<=r) return tree[idx];
+    int mid=(b+e)/2,left=idx*2,right=idx*2+1;
+    ll left_sum=query(left,b,mid,l,r);
+    ll right_sum=query(right,mid+1,e,l,r);
+    return left_sum+right_sum;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n,q;
+    cin>>n>>q;
+    for (int i=1;i<=n;i++) cin>>arr[i];
+    build(1,1,n);
+    while(q--){
+        int a,b,c;
+        cin>>a>>b>>c;
+        if (a==2) cout<<query(1,1,n,b,c)<<endl;
+        else update(1,1,n,b,c);
+    }
+}
