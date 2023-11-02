@@ -1,0 +1,40 @@
+//https://cses.fi/problemset/task/1650/
+#include<iostream>
+using namespace std;
+using ll=long long;
+int arr[200001],tree[600001];
+void build(int idx, int b, int e)
+{
+    if (b==e) {
+        tree[idx]=arr[b];
+        return;
+    }
+    int mid=(b+e)/2,left=idx*2,right=idx*2+1;
+    build(left,b,mid);
+    build(right,mid+1,e);
+    tree[idx]=tree[left]^tree[right];
+}
+int query(int idx, int b, int e, int l, int r)
+{
+    if (r<b || e<l) return 0;
+    if (l<=b && e<=r) return tree[idx];
+    int mid=(b+e)/2,left=idx*2,right=idx*2+1;
+    int left_xor=query(left,b,mid,l,r);
+    int right_xor=query(right,mid+1,e,l,r);
+    return left_xor^right_xor;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n,q;
+    cin>>n>>q;
+    for (int i=1;i<=n;i++) cin>>arr[i];
+    build(1,1,n);
+    while(q--){
+        int a,b;
+        cin>>a>>b;
+        cout<<query(1,1,n,a,b)<<endl;
+    }
+}
