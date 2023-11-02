@@ -1,0 +1,31 @@
+//https://cses.fi/problemset/task/1141/
+#include<iostream>
+#include<map>
+using namespace std;
+using ll=long long;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin>>n;
+    int arr[n];
+    for (int i=0;i<n;i++) cin>>arr[i];
+    map<int,int> m;
+	m[arr[0]]=1;
+    int ans=1,j=0;
+    for (int i=1;i<n;i++){
+    	if (m[arr[i]]>0){
+    		ans=max(ans,int(m.size()));
+    		while(j<i){ 
+    			m[arr[j]]--;
+    			if (m[arr[j]]==0) m.erase(arr[j]);
+    			if (arr[i]==arr[j++]) break;
+    		}
+    	}
+    	m[arr[i]]++;
+    }
+    ans=max(ans,int(m.size()));
+    cout<<ans<<endl;
+}
