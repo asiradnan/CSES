@@ -1,0 +1,29 @@
+//https://cses.fi/problemset/task/1163/
+#include<iostream>
+#include<set>
+#include<algorithm>
+using namespace std;
+using ll=long long;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int x,n;
+    cin>>x>>n;
+    set<int> s={0,x};
+    multiset<int> ms {x};
+    while(n--){
+    	int a;
+    	cin>>a;
+		s.insert(a);
+		auto it=s.find(a);
+		auto jt=it;
+		int x=*(++it)-*(--jt);
+		ms.erase(ms.find(x));
+		ms.insert(*it-a);
+		ms.insert(a-*jt);
+		cout<<*(--ms.end())<<' ';
+    }
+   	cout<<endl;
+}
