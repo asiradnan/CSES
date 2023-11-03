@@ -1,0 +1,35 @@
+//https://cses.fi/problemset/task/1131/
+#include<iostream>
+#include<vector>
+using namespace std;
+using ll=long long;
+vector<int> edges[2000001];
+int ans=0;
+int diameter(int x,int parent)
+{
+	int c=0,d=0;
+	for (int i:edges[x]){
+		if (i!=parent){
+			d=diameter(i,x);
+			ans=max(ans,c+d);
+			c=max(c,d);
+		}
+	}
+	return c+1;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin>>n;
+    for (int i=1;i<n;i++){
+    	int a,b;
+    	cin>>a>>b;
+    	edges[a].push_back(b);
+    	edges[b].push_back(a);
+    }
+    diameter(1,0);
+    cout<<ans<<endl;
+}
