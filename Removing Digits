@@ -1,0 +1,28 @@
+//https://cses.fi/problemset/task/1637/
+#include<iostream>
+#include<vector>
+using namespace std;
+using ll=long long;
+vector<int> dp(1000001,-1);
+int recur(int x)
+{
+	if (dp[x]!=-1) return dp[x];
+	if (x==0) return 0;
+	int temp=x;
+	int ans=1e7;
+	while(temp){
+		if (temp%10) ans=min(recur(x-temp%10)+1,ans);
+		temp/=10;
+	}
+	return dp[x]=ans;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int mod=1e9+7;
+    int n;
+    cin>>n;
+    cout<<recur(n)<<endl;
+}
