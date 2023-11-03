@@ -1,0 +1,27 @@
+//https://cses.fi/problemset/task/1635
+#include<iostream>
+#include<vector>
+using namespace std;
+using ll=long long;
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int mod=1e9+7; //important to use inside main
+    int n,x;
+    cin>>n>>x;
+    int coins[n];
+    for (int &i:coins) cin>>i;
+    vector<int> dp(x+1);
+    dp[0]=1;
+	for (int j=1;j<=x;j++){
+		for (int i=0;i<n;i++){
+			if (coins[i]<=j) {
+				dp[j]+=dp[j-coins[i]];
+				dp[j]%=mod;
+			}
+		}
+	}
+    cout<<dp[x]<<endl;
+}
