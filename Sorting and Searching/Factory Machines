@@ -1,0 +1,30 @@
+//https://cses.fi/problemset/task/1620/
+#include<iostream>
+using namespace std;
+using ll=long long;
+int arr[200001];
+int n,t;
+bool good(ll m)
+{
+	ll cnt=0;
+	for (int i=0;i<n;i++){
+		cnt+=(m/arr[i]);
+		if (cnt>=t) return true;
+	}
+	return false;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    cin>>n>>t;
+    for (int i=0;i<n;i++) cin>>arr[i];
+    ll l=0,r=1e18;
+	while(l+1<r){
+		ll m=(l+r)/2;
+		if (good(m)) r=m;
+		else l=m;
+	}
+	cout<<r<<endl;
+}
