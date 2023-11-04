@@ -1,0 +1,50 @@
+//https://cses.fi/problemset/task/1164/
+#include<iostream>
+#include<vector>
+#include<algorithm>
+#include<set>
+#include<climits>
+using namespace std;
+using ll=long long;
+struct T
+{
+	int arrive,leave,index;
+};
+bool comp(T a, T b)
+{
+	if (a.leave==b.leave) return a.arrive<b.arrive;
+	return a.leave<b.leave;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    int n;
+    cin>>n;
+    vector<T> v;
+    for (int i=0;i<n;i++){
+    	int a,b;
+    	cin>>a>>b;
+    	v.push_back({a,b,i});
+    }
+    sort(v.begin(),v.end(),comp);
+    multiset<pair<int,int>> last={{0,1}};
+    vector<int> ans(n);
+    for (auto i:v){
+    	auto it=last.lower_bound({i.arrive,INT_MIN});
+    	if (it==last.begin()) {
+    		last.insert({i.leave,last.size()+1});
+    		ans[i.index]=last.size();
+    	}
+    	else {
+    		--it;
+    		ans[i.index]=(*(it)).second;
+    		last.erase(it);
+    		last.insert({i.leave,ans[i.index]});
+    	}
+    }
+    cout<<last.size()<<endl;
+    for (int i: ans) cout<<i<<' ';
+    cout<<endl;
+}
