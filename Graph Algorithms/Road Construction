@@ -1,0 +1,49 @@
+//https://cses.fi/problemset/task/1676/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int arr[100001];
+int sz[100001];
+void make (int n)
+{
+	for (int i=1;i<=n;i++) {
+		arr[i]=i;
+		sz[i]=1;
+	}
+}
+int parent(int a)
+{
+	if (arr[a]==a) return a;
+	return arr[a]=parent(arr[a]);
+}
+void unite(int a, int b)
+{
+	arr[b]=a;
+	sz[a]+=sz[b];
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int n,m;
+    cin>>n>>m;
+    make(n);
+    int mx=1;
+    while(m--){
+    	int a,b;
+    	cin>>a>>b;
+    	a=parent(a);
+    	b=parent(b);
+    	if (a!=b){
+    		if (sz[a]<sz[b]) swap(a,b);
+    		unite(a,b);
+    		n--;
+    	}
+    	mx=max(mx,sz[a]);
+    	cout<<n<<' '<<mx<<endl;
+    }
+}
