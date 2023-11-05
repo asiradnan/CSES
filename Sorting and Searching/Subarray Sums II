@@ -1,0 +1,26 @@
+//https://cses.fi/problemset/task/1661/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int n,x;
+    cin>>n>>x;
+    map<ll,int> m;
+    m[0]++;
+    ll ans=0,current_sum=0;
+    for (int i=0;i<n;i++) {
+    	int a;
+    	cin>>a;
+    	current_sum+=a;
+    	ans+=m[current_sum-x];
+    	m[current_sum]++;
+    }
+	cout<<ans<<endl;
+}
