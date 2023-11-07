@@ -1,0 +1,39 @@
+//https://cses.fi/problemset/task/1755/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    string s;
+    cin>>s;
+    map<int,int> m;
+    for (char i:s) m[int(i)]++;
+    string ans="";
+	bool possible=true;
+	string odd="a";
+    for (auto p:m) {
+    	if (p.second&1) {
+    		if (odd!="a") possible=false;
+    		else {
+    			odd="";
+    			for (int i=0;i<p.second;i++) odd+=char(p.first);
+    		}
+    	}
+    	else{
+    		for (int i=0;i<p.second/2;i++) ans+=char(p.first);
+    	}
+    }
+    if (possible){
+    	cout<<ans;
+	    if (odd!="a") cout<<odd;
+	    for (int i=ans.size()-1;i>=0;i--) cout<<ans[i];
+	    cout<<endl;
+    }
+    else cout<<"NO SOLUTION\n";
+}
