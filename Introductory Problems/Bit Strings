@@ -1,0 +1,27 @@
+//https://cses.fi/problemset/task/1617/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+const int mod=1e9+7;
+int binExpo(int n)
+{
+	ll a=2, ans=1;
+	while(n){
+		if (n&1) ans=(ans*a)%mod;
+		a=(a*a)%mod;
+		n>>=1;
+	}
+	return ans;
+}
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int n;
+    cin>>n;
+    cout<<fixed<<setprecision(0)<<binExpo(n)<<endl;
+}
