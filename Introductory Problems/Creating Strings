@@ -1,0 +1,34 @@
+//https://cses.fi/problemset/task/1622/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+set<string> ss;
+void func(string s, int idx)
+{
+	if (idx==s.size()) return;
+	
+	for (int i=idx;i<s.size();i++){
+		swap(s[i],s[idx]);
+		func(s,idx+1);
+		swap(s[i],s[idx]);
+	}
+	ss.insert(s);
+}
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    string s;
+    cin>>s;
+    func(s,0);
+    cout<<ss.size()<<endl;
+    auto it=ss.begin();
+    while(it!=ss.end()){
+    	cout<<(*it)<<endl;
+    	it++;
+    }
+}
