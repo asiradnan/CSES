@@ -1,0 +1,35 @@
+//https://cses.fi/problemset/task/1092/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    ll n;
+    cin>>n;
+    ll x=(n*(n+1))/2;
+    if (x&1) cout<<"NO\n";
+    else{
+    	ll target=x/2;
+    	vector<int> one, two;
+    	for (int i=n;i>0;i--){
+    		if (i<=target) {
+    			one.push_back(i);
+    			target-=i;
+    		}
+    		else two.push_back(i);
+    	}
+    	cout<<"YES\n";
+    	cout<<one.size()<<endl;
+    	for (int i:one) cout<<i<<' ';
+    	cout<<endl;
+    	cout<<two.size()<<endl;
+    	for (int i:two) cout<<i<<' ';
+    	cout<<endl;
+    }
+}
