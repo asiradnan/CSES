@@ -1,0 +1,24 @@
+//https://cses.fi/problemset/task/1645/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int n;
+    cin>>n;
+    stack<pair<int,int>> sk;
+    for (int i=0;i<n;i++) {
+    	int a;
+    	cin>>a;
+    	while(!sk.empty() && sk.top().first>=a) sk.pop();
+    	if (sk.empty()) cout<<"0 ";
+    	else cout<<sk.top().second<<' ';	
+    	sk.push({a,i+1});
+    }
+}
