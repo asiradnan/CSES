@@ -1,0 +1,36 @@
+//https://cses.fi/problemset/task/2162/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int n;
+    cin>>n;
+    if (n==1) {
+    	cout<<"1\n";
+    	return 0;
+    }
+    vector<int> pre(n+1),post(n+1);
+    for (int i=1;i<=n;i++){
+    	if (i==1) pre[i]=n;
+    	else pre[i]=i-1;
+    	if (i==n) post[i]=1;
+    	else post[i]=i+1;
+    }
+    int j=2;
+    post[pre[j]]=post[j];
+    pre[post[j]]=pre[j];
+    cout<<"2 ";
+    for (int k=0;k<n-1;k++){
+    	j=post[post[j]];
+    	post[pre[j]]=post[j];
+    	pre[post[j]]=pre[j];
+    	cout<<j<<" ";
+    }
+}
