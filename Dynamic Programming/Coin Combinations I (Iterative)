@@ -1,26 +1,25 @@
 //https://cses.fi/problemset/task/1635
-#include<iostream>
-#include<vector>
+#include<bits/stdc++.h>
 using namespace std;
+
 using ll=long long;
+
+const int mod=1e9+7;
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(0);
     cout.tie(0);
-    int mod=1e9+7; //important to use inside main
+    
     int n,x;
     cin>>n>>x;
-    int coins[n];
-    for (int &i:coins) cin>>i;
-    vector<int> dp(x+1);
-    dp[0]=1;
-	for (int j=1;j<=x;j++){
-		for (int i=0;i<n;i++){
-			if (coins[i]<=j) {
-				dp[j]+=dp[j-coins[i]];
-				dp[j]%=mod;
-			}
+    int arr[n];
+	for (int i=0;i<n;i++) cin>>arr[i];
+    vector<int> dp(1e6+1);
+	dp[0]=1;
+	for (int i=0;i<=x;i++){
+		for (int j=0;j<n;j++){
+			if (i+arr[j]<=x) dp[i+arr[j]]=(dp[i]+dp[i+arr[j]])%mod;
 		}
 	}
     cout<<dp[x]<<endl;
