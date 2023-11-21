@@ -1,0 +1,21 @@
+//https://cses.fi/problemset/task/1618/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    int n;
+    cin>>n;
+    ll f=5,ans=0;
+    while(f<=n){
+    	ans+=n/f;
+    	f*=5;
+    }
+    cout<<ans<<endl;
+}
