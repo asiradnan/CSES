@@ -1,0 +1,26 @@
+//https://cses.fi/problemset/task/2205/
+#include<bits/stdc++.h>
+using namespace std;
+
+using ll=long long;
+
+int main()
+{
+    ios::sync_with_stdio(false);
+    cin.tie(0);
+    cout.tie(0);
+    
+    vector<string> v[17];
+    v[1]={"0","1"};
+    for (int i=2;i<=16;i++){
+    	for (int j=0;j<v[i-1].size();j++){
+    		v[i].push_back("0"+v[i-1][j]);
+    	}
+    	for (int j=v[i-1].size()-1;j>=0;j--){
+    		v[i].push_back("1"+v[i-1][j]);
+    	}
+    }
+    int n;
+    cin>>n;
+    for (string i:v[n]) cout<<i<<endl;
+}
